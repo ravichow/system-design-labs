@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
+
+:root {
+  --paper: #f4ebe0;
+  --paper-2: #f7efe4;
+  --sheet: #f9f2e8;
+  --card: #f8f0e6;
+  --card-2: #f6eee3;
+  --line: #ddd3c5;
+  --line-soft: #e6ddd0;
+  --line-strong: #c6bbac;
+  --edge: #46413b;
+  --ink: #1d1b18;
+  --ink-2: #34302b;
+  --muted: #6f6961;
+  --muted-2: #8b847a;
+  --drop: #1d1b18;
+  --drop-2: #34302b;
+
+  /* Accents */
+  --green: #cfe3b2;
+  --green-2: #b2d491;
+  --green-3: #7fc278;
+  --green-tile: #e8efd9;
+  --violet: #e7ddf5;
+  --orange: #fcdcbd;
+  --mint: #dff0de;
+  --rust: #d0683a;
+  --rust-2: #d97a4f;
+  --amber: #fbe5bd;
+  --blue: #d6e5f6;
+  --red: #f8d5cf;
+  --teal: #ccebe6;
+  --rose: #fad8e2;
+
+  --pop-shadow: 1.5px 2.5px 0 var(--drop);
+  --pop-shadow-lg: 3px 4px 0 var(--drop);
+  --card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65), 0 1px 0 rgba(80, 60, 35, 0.06), 0 10px 22px -16px rgba(80, 60, 35, 0.35);
+  --radius: 12px;
+  --font: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #211e1a;
+  --paper-2: #25211c;
+  --sheet: #28241f;
+  --card: #26231e;
+  --card-2: #24201c;
+  --line: #342f28;
+  --line-soft: #29251f;
+  --line-strong: #4f473d;
+  --edge: #c6bfb7;
+  --ink: #efe6d6;
+  --ink-2: #ddd3c2;
+  --muted: #a3998b;
+  --muted-2: #8d7f6c;
+  --drop: #050403;
+  --drop-2: #0b0907;
+
+  --green: #3f4c2b;
+  --green-2: #2e3b22;
+  --green-3: #7fc278;
+  --green-tile: #505c38;
+  --violet: #493563;
+  --orange: #5a4531;
+  --mint: #3c5c3a;
+  --rust: #d0683a;
+  --rust-2: #d97a4f;
+  --amber: #53472d;
+  --blue: #233446;
+  --red: #5c3931;
+  --teal: #1f3f3c;
+  --rose: #542c38;
+
+  --pop-shadow: 1.5px 2.5px 0 var(--drop);
+  --pop-shadow-lg: 3px 4px 0 var(--drop);
+  --card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 1px 0 rgba(0, 0, 0, 0.3), 0 10px 22px -16px rgba(0, 0, 0, 0.6);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font);
+  background-color: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  overflow-x: hidden;
+}
+
+/* Button & interactive primitives */
+.btn-pop {
+  font-family: var(--font);
+  background: var(--card);
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+  border-radius: 8px;
+  box-shadow: var(--pop-shadow);
+  cursor: pointer;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.12s cubic-bezier(0.2, 0.8, 0.2, 1);
+  user-select: none;
+}
+
+.btn-pop:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 2.5px 3.5px 0 var(--drop);
+}
+
+.btn-pop:active {
+  transform: translate(1px, 1.5px);
+  box-shadow: 0.5px 0.5px 0 var(--drop);
+}
+
+.btn-pop.is-active {
+  background: var(--green);
+  border-color: var(--ink);
+  box-shadow: var(--pop-shadow);
+}
+
+[data-theme="dark"] .btn-pop.is-active {
+  background: #3c542a;
+  color: #efe6d6;
+}
+
+/* Hard tags and pill badges */
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  border: 1.2px solid var(--ink);
+  box-shadow: 1px 1px 0 var(--drop);
+}
+
+.tone-sand { background: var(--sheet); color: var(--ink); }
+.tone-green { background: #dcefd2; color: #24521c; }
+.tone-amber { background: #fbe5bd; color: #6d4a0c; }
+.tone-violet { background: #e7ddf5; color: #47306f; }
+.tone-red { background: #f8d5cf; color: #8f2a22; }
+.tone-blue { background: #d6e5f6; color: #1f63a0; }
+.tone-teal { background: #ccebe6; color: #1d7066; }
+.tone-rose { background: #fad8e2; color: #a83a58; }
+
+[data-theme="dark"] .tone-green { background: #2f4323; color: #bde1b7; }
+[data-theme="dark"] .tone-amber { background: #4d3d1f; color: #ebd1ad; }
+[data-theme="dark"] .tone-violet { background: #3c2a55; color: #d0bee6; }
+[data-theme="dark"] .tone-red { background: #4d2621; color: #f2aca4; }
+[data-theme="dark"] .tone-blue { background: #1c3652; color: #bad7f5; }
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--paper-2);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
