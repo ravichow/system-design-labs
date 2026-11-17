@@ -12,6 +12,7 @@ import { CURRICULUM } from './data/curriculum';
 export const App: React.FC = () => {
   const [currentTab, setCurrentTab] = useState<NavTab>('learn');
   const [activeLessonId, setActiveLessonId] = useState<string>('request-lifecycle');
+  const [activeStepIndex, setActiveStepIndex] = useState<number>(0);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isDark, setIsDark] = useState(() => {
     return localStorage.getItem('scale_theme') === 'dark';
@@ -40,11 +41,20 @@ export const App: React.FC = () => {
         setCurrentTab('lab');
       } else if (hash === 'cheatsheets') {
         setCurrentTab('cheatsheets');
-      } else if (hash.startsWith('learn') || hash) {
-        const lessonId = hash.split('/')[0];
+      } else if (hash) {
+        const parts = hash.split('/');
+        const lessonId = parts[0] === 'learn' ? parts[1] : parts[0];
+        const stepNum = parts[0] === 'learn' ? parts[2] : parts[1];
+
         if (lessonId && lessonId !== 'learn') {
           setActiveLessonId(lessonId);
           setCurrentTab('learn');
+          if (stepNum) {
+            const parsed = parseInt(stepNum, 10);
+            if (!isNaN(parsed) && parsed >= 1) {
+              setActiveStepIndex(parsed - 1);
+            }
+          }
         }
       }
     };
@@ -57,7 +67,7 @@ export const App: React.FC = () => {
   const handleSelectTab = (tab: NavTab) => {
     setCurrentTab(tab);
     if (tab === 'learn') {
-      window.location.hash = `#/${activeLessonId}`;
+      window.location.hash = `#/${activeLessonId}/${activeStepIndex + 1}`;
     } else {
       window.location.hash = `#/${tab}`;
     }
@@ -65,12 +75,18 @@ export const App: React.FC = () => {
 
   const handleSelectLesson = (lessonId: string) => {
     setActiveLessonId(lessonId);
+    setActiveStepIndex(0);
     setCurrentTab('learn');
-    window.location.hash = `#/${lessonId}`;
+    window.location.hash = `#/${lessonId}/1`;
     // On small screens, close sidebar
     if (window.innerWidth < 768) {
       setIsSidebarOpen(false);
     }
+  };
+
+  const handleSelectStep = (idx: number) => {
+    setActiveStepIndex(idx);
+    window.location.hash = `#/${activeLessonId}/${idx + 1}`;
   };
 
   const handleNextLesson = () => {
@@ -108,7 +124,12 @@ export const App: React.FC = () => {
         )}
 
         {currentTab === 'learn' && (
-          <LearnView lesson={currentLesson} onNextLesson={handleNextLesson} />
+          <LearnView
+            lesson={currentLesson}
+            stepIndex={activeStepIndex}
+            onSelectStep={handleSelectStep}
+            onNextLesson={handleNextLesson}
+          />
         )}
 
         {currentTab === 'practice' && <PracticeView />}
@@ -118,4 +139,3 @@ export const App: React.FC = () => {
     </div>
   );
 };
-

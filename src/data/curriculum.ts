@@ -21,8 +21,8 @@ export const CURRICULUM: ModuleInfo[] = [
       { id: 'vertical-horizontal', title: 'Vertical vs Horizontal', ready: true },
       { id: 'load-balancing', title: 'Load Balancing', ready: true },
       { id: 'stateless', title: 'Stateless Services', ready: true },
-      { id: 'caching', title: 'Caching Strategies', ready: true },
-      { id: 'cdn', title: 'Content Delivery (CDN)', ready: true }
+      { id: 'caching', title: 'Caching', ready: true },
+      { id: 'cdn', title: 'Content Delivery', ready: true }
     ]
   },
   {
@@ -32,11 +32,16 @@ export const CURRICULUM: ModuleInfo[] = [
     color: 'violet',
     lessons: [
       { id: 'sql-nosql', title: 'SQL vs NoSQL', ready: true },
-      { id: 'indexes', title: 'B-Trees & Indexes', ready: true },
-      { id: 'replication', title: 'Replication & Failover', ready: true },
-      { id: 'sharding', title: 'Database Sharding', ready: true },
+      { id: 'indexes', title: 'Indexes', ready: true },
+      { id: 'storage-engines', title: 'Storage Engines', ready: true },
+      { id: 'replication', title: 'Replication', ready: true },
+      { id: 'sharding', title: 'Sharding', ready: true },
       { id: 'consistent-hashing', title: 'Consistent Hashing', ready: true },
-      { id: 'cap', title: 'CAP & Consistency', ready: true }
+      { id: 'unique-ids', title: 'Unique IDs at Scale', ready: true },
+      { id: 'cap', title: 'CAP & Consistency', ready: true },
+      { id: 'consensus', title: 'Consensus & Leaders', ready: true },
+      { id: 'transactions', title: 'Transactions & Isolation', ready: true },
+      { id: 'files', title: 'Files & Media', ready: true }
     ]
   },
   {
@@ -45,10 +50,10 @@ export const CURRICULUM: ModuleInfo[] = [
     title: 'Communication',
     color: 'orange',
     lessons: [
-      { id: 'apis', title: 'REST, gRPC & GraphQL', ready: true },
+      { id: 'apis', title: 'REST, RPC & GraphQL', ready: true },
       { id: 'queues', title: 'Message Queues', ready: true },
-      { id: 'pubsub', title: 'Pub/Sub & Event Streams', ready: true },
-      { id: 'realtime', title: 'Real-time & WebSockets', ready: true }
+      { id: 'pubsub', title: 'Pub/Sub & Events', ready: true },
+      { id: 'realtime', title: 'Real-time Updates', ready: true }
     ]
   },
   {
@@ -59,8 +64,8 @@ export const CURRICULUM: ModuleInfo[] = [
     lessons: [
       { id: 'redundancy', title: 'Redundancy & Failover', ready: true },
       { id: 'rate-limiting', title: 'Rate Limiting', ready: true },
-      { id: 'timeouts-retries', title: 'Timeouts & Exponential Backoff', ready: true },
-      { id: 'observability', title: 'Metrics, Logs & Traces', ready: true }
+      { id: 'timeouts-retries', title: 'Timeouts & Retries', ready: true },
+      { id: 'observability', title: 'Observability', ready: true }
     ]
   },
   {
@@ -71,7 +76,8 @@ export const CURRICULUM: ModuleInfo[] = [
     lessons: [
       { id: 'microservices', title: 'Monolith vs Microservices', ready: true },
       { id: 'service-discovery', title: 'Service Discovery', ready: true },
-      { id: 'sagas', title: 'Sagas & Distributed Tx', ready: true }
+      { id: 'sagas', title: 'Sagas & Distributed Tx', ready: true },
+      { id: 'batch-stream', title: 'Batch & Stream Processing', ready: true }
     ]
   },
   {
@@ -80,20 +86,31 @@ export const CURRICULUM: ModuleInfo[] = [
     title: 'Security',
     color: 'rose',
     lessons: [
-      { id: 'authentication', title: 'Authentication (OAuth/JWT)', ready: true },
-      { id: 'authorization', title: 'Role & Attribute RBAC', ready: true },
-      { id: 'encryption', title: 'TLS & Secrets in Transit', ready: true }
+      { id: 'authentication', title: 'Authentication', ready: true },
+      { id: 'authorization', title: 'Authorization', ready: true },
+      { id: 'encryption', title: 'Encryption & Secrets', ready: true }
     ]
   },
   {
-    id: 'whole-systems',
+    id: 'shipping',
+    num: '08',
+    title: 'Shipping',
+    color: 'olive',
+    lessons: [
+      { id: 'testing', title: 'Testing', ready: true },
+      { id: 'cicd', title: 'CI/CD & Deployments', ready: true }
+    ]
+  },
+  {
+    id: 'design',
     num: '09',
     title: 'Whole Systems',
     color: 'slate',
     lessons: [
-      { id: 'design-url-shortener', title: 'Design TinyURL', ready: true },
-      { id: 'design-news-feed', title: 'Design Twitter / News Feed', ready: true },
-      { id: 'design-chat', title: 'Design WhatsApp / Chat', ready: true }
+      { id: 'hld-lld', title: 'HLD & LLD', ready: true },
+      { id: 'design-url-shortener', title: 'Design a URL Shortener', ready: true },
+      { id: 'design-news-feed', title: 'Design a News Feed', ready: true },
+      { id: 'design-chat', title: 'Design a Chat System', ready: true }
     ]
   }
 ];
@@ -105,4 +122,3 @@ export function findLesson(id: string) {
   }
   return null;
 }
-

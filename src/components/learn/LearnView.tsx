@@ -7,22 +7,35 @@ import { StepTimeline } from './StepTimeline';
 
 interface LearnViewProps {
   lesson: LessonData;
+  stepIndex?: number;
+  onSelectStep?: (index: number) => void;
   onNextLesson?: () => void;
 }
 
-export const LearnView: React.FC<LearnViewProps> = ({ lesson, onNextLesson }) => {
-  const [stepIndex, setStepIndex] = useState(0);
+export const LearnView: React.FC<LearnViewProps> = ({
+  lesson,
+  stepIndex: externalStepIndex,
+  onSelectStep: externalOnSelectStep,
+  onNextLesson
+}) => {
+  const [internalStepIndex, setInternalStepIndex] = useState(0);
 
-  // Reset to step 0 when lesson changes
-  useEffect(() => {
-    setStepIndex(0);
-  }, [lesson.id]);
+  const stepIndex = externalStepIndex !== undefined ? externalStepIndex : internalStepIndex;
+  const setStepIndex = (idx: number) => {
+    if (externalOnSelectStep) {
+      externalOnSelectStep(idx);
+    } else {
+      setInternalStepIndex(idx);
+    }
+  };
 
-  const currentStep = lesson.steps[stepIndex] || lesson.steps[0];
+  // Ensure step index stays in valid range
+  const safeStepIndex = Math.min(Math.max(0, stepIndex), Math.max(0, lesson.steps.length - 1));
+  const currentStep = lesson.steps[safeStepIndex] || lesson.steps[0];
 
   const handleNext = () => {
-    if (stepIndex < lesson.steps.length - 1) {
-      setStepIndex(stepIndex + 1);
+    if (safeStepIndex < lesson.steps.length - 1) {
+      setStepIndex(safeStepIndex + 1);
     } else if (onNextLesson) {
       onNextLesson();
     }
@@ -34,19 +47,19 @@ export const LearnView: React.FC<LearnViewProps> = ({ lesson, onNextLesson }) =>
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
       if (e.key === 'ArrowRight' || e.key === ' ') {
         e.preventDefault();
-        if (stepIndex < lesson.steps.length - 1) {
-          setStepIndex((s) => s + 1);
+        if (safeStepIndex < lesson.steps.length - 1) {
+          setStepIndex(safeStepIndex + 1);
         }
       } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
-        if (stepIndex > 0) {
-          setStepIndex((s) => s - 1);
+        if (safeStepIndex > 0) {
+          setStepIndex(safeStepIndex - 1);
         }
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [stepIndex, lesson.steps.length]);
+  }, [safeStepIndex, lesson.steps.length]);
 
   return (
     <div className="learn-viewport">
@@ -55,7 +68,7 @@ export const LearnView: React.FC<LearnViewProps> = ({ lesson, onNextLesson }) =>
         <IsoStage scene={currentStep.scene} />
         <StepTimeline
           steps={lesson.steps}
-          currentStepIndex={stepIndex}
+          currentStepIndex={safeStepIndex}
           onSelectStep={setStepIndex}
         />
       </div>
@@ -63,11 +76,10 @@ export const LearnView: React.FC<LearnViewProps> = ({ lesson, onNextLesson }) =>
       <GuidePanel
         lesson={lesson}
         step={currentStep}
-        stepIndex={stepIndex}
+        stepIndex={safeStepIndex}
         totalSteps={lesson.steps.length}
         onNext={handleNext}
       />
     </div>
   );
 };
-

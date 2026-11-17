@@ -24,11 +24,21 @@ export interface TagInfo {
 
 export interface IsoEntity {
   id?: string;
-  type?: 'block' | 'db' | 'crowd' | 'panel' | 'zone' | 'queue';
-  x: number;
-  y: number;
+  type?: 'block' | 'db' | 'crowd' | 'panel' | 'zone' | 'queue' | 'ghost' | 'ring' | 'device';
+  x?: number;
+  y?: number;
+  z?: number;
   s?: number; // size
   h?: number; // height
+  w?: number;
+  d?: number;
+  r?: number;
+  x0?: number;
+  x1?: number;
+  y0?: number;
+  y1?: number;
+  dx?: number;
+  dy?: number;
   color?: string;
   glyph?: string;
   label?: string | string[];
@@ -43,24 +53,53 @@ export interface IsoEntity {
   radius?: number;
   pills?: 'above' | 'below';
   labelFade?: number;
+  tagFade?: number;
+  count?: number;
+  n?: number;
+  dir?: [number, number];
+  gap?: number;
+  chart?: string | null;
+  marker?: number;
+  bars?: Array<{ label: string; note?: string; val?: number; from?: number; to?: number; tone?: string; bold?: boolean }>;
+  lines?: string[];
+  title?: string;
+  icon?: string;
+  form?: string;
+  nodes?: Array<{ a: number; color: string; mark?: boolean }>;
+  keys?: number[];
+  moved?: number[];
+  [key: string]: any;
 }
 
 export interface IsoLink {
   from?: string;
   to?: string;
-  pts: [number, number][];
+  pts: any[];
   heads?: 'end' | 'both' | 'none';
   color?: string;
   label?: string;
+  style?: string;
   dashed?: boolean;
+  labelTone?: string;
+  labelAt?: number;
+  fail?: boolean;
+  [key: string]: any;
 }
 
 export interface IsoFlow {
-  route: string[];
-  kind?: 'req' | 'res' | 'ping';
+  route?: any[];
+  routes?: Array<{ path: string[]; kind?: string; weight?: number }>;
+  kind?: string;
   bounce?: boolean;
   rate?: number;
   color?: string;
+  speed?: number;
+  hold?: number;
+  pick?: string;
+  weights?: number[];
+  pattern?: string[];
+  fanout?: boolean;
+  [key: string]: any;
 }
 
 export interface SceneGraph {
@@ -96,14 +135,16 @@ export interface LessonStep {
 
 export interface LessonData {
   id: string;
-  moduleId: string;
+  moduleId?: string;
   title: string;
   summary: string;
   minutes: number;
   level: 'beginner' | 'intermediate' | 'advanced';
   metrics: string[];
+  legend?: any[];
   goals?: { text: string; step: number }[];
   steps: LessonStep[];
+  [key: string]: any;
 }
 
 export interface QuizScenario {

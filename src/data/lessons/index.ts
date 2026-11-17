@@ -1,13 +1,14 @@
 import { LessonData } from '../../types';
-import { requestLifecycleLesson } from './request-lifecycle';
-import { loadBalancingLesson } from './load-balancing';
+import allLessonsData from '../allLessons.json';
+import { findLesson } from '../curriculum';
 
-export const ALL_LESSONS: Record<string, LessonData> = {
-  'request-lifecycle': requestLifecycleLesson,
-  'load-balancing': loadBalancingLesson
-};
+export const ALL_LESSONS: Record<string, LessonData> = allLessonsData as unknown as Record<string, LessonData>;
 
 export function getLesson(id: string): LessonData {
-  return ALL_LESSONS[id] || requestLifecycleLesson;
+  const lesson = ALL_LESSONS[id] || ALL_LESSONS['request-lifecycle'];
+  const cur = findLesson(id);
+  return {
+    ...lesson,
+    moduleId: cur?.module?.id || 'foundations'
+  };
 }
-

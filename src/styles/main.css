@@ -246,6 +246,64 @@
   display: block;
 }
 
+/* Isometric Stage Link & Entity Styles */
+.link {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.9px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.4s ease;
+}
+.link--dashed {
+  stroke-dasharray: 5 4.5;
+}
+.link--off {
+  stroke: #b0a698;
+  stroke-width: 1.6px;
+  stroke-dasharray: 4 5;
+}
+.link--beat {
+  stroke: #3fa456;
+  stroke-width: 2px;
+  stroke-dasharray: 1.5 5.5;
+}
+.link--cut {
+  stroke: #c0392b;
+  stroke-width: 2px;
+  stroke-dasharray: 7 6;
+}
+
+.moved {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: 1.4s ease-out infinite moved;
+}
+
+@keyframes moved {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.6);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+
+.pulse {
+  animation: pulse-glow 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
 /* Guide Panel (Right column on desktop, collapsible) */
 .guide-panel {
   width: 440px;
