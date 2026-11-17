@@ -274,6 +274,124 @@
   stroke-dasharray: 7 6;
 }
 
+/* Authentic Packets and FX */
+.pkt {
+  transition: opacity 0.25s;
+}
+.pkt circle,
+.pkt rect {
+  fill: #f3b47f;
+  stroke: var(--ink);
+  stroke-width: 1.5px;
+}
+.pkt--heavy rect {
+  fill: #e8834d;
+  stroke-width: 1.7px;
+}
+.pkt--ping circle {
+  fill: #f4fbef;
+  stroke: #2f8a43;
+  stroke-width: 2.1px;
+}
+.pkt--ping.pkt--back circle {
+  fill: #9fd28f;
+}
+.pkt--slow circle {
+  fill: #efb041;
+}
+.pkt--mine circle {
+  fill: #b79ce6;
+  stroke-width: 1.7px;
+}
+.pkt--write rect {
+  fill: #5d5466;
+  stroke: var(--ink);
+}
+.pkt--kill circle {
+  fill: #fde3df;
+  stroke: #c0392b;
+  stroke-width: 2.1px;
+}
+.pkt--mine.pkt--back circle {
+  fill: #9fd28f;
+}
+.pkt--msg rect {
+  fill: #efb041;
+  stroke: var(--ink);
+  stroke-width: 1.5px;
+}
+.pkt--poison rect {
+  fill: #e5534b;
+  stroke: #5e1b16;
+  stroke-width: 1.6px;
+}
+.pkt--push circle {
+  fill: #9fd28f;
+}
+.pkt--empty circle {
+  fill: #fbf6ef;
+}
+.pkt--empty.pkt--back circle {
+  fill: #d9d0c4;
+}
+.pkt--leave {
+  opacity: 0;
+}
+.pkt--held {
+  opacity: 0.6;
+}
+
+.fx-ring,
+.fx-x,
+.spot {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+.fx--fail .fx-ring {
+  fill: #e5534b;
+  stroke: #8f2a22;
+  stroke-width: 1.4px;
+  animation: 0.65s ease-out forwards fx-burst;
+}
+.fx--fail .fx-x {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 1.9px;
+  stroke-linecap: round;
+  animation: 0.65s ease-out forwards fx-fade;
+}
+.fx--ok .fx-ring {
+  fill: none;
+  stroke: #3fa456;
+  stroke-width: 1.6px;
+  animation: 0.45s ease-out forwards fx-pop;
+}
+.spot {
+  fill: rgba(33, 30, 27, 0.08);
+  stroke: #5fae57;
+  stroke-width: 2.4px;
+  animation: 1.5s ease-out forwards spot;
+}
+
+@keyframes fx-burst {
+  0% { opacity: 1; transform: scale(0.7); }
+  45% { opacity: 1; transform: scale(1.25); }
+  100% { opacity: 0; transform: scale(2.3); }
+}
+@keyframes fx-fade {
+  0%, 45% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes fx-pop {
+  0% { opacity: 0.9; transform: scale(0.8); }
+  100% { opacity: 0; transform: scale(2); }
+}
+@keyframes spot {
+  0% { opacity: 0; transform: scale(0.75); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.4); }
+}
+
 .moved {
   transform-box: fill-box;
   transform-origin: 50% 50%;

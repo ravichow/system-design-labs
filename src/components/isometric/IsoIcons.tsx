@@ -77,3 +77,4 @@ export const IsoIcon: React.FC<{ name: string; size?: number; stroke?: number; c
     </svg>
   );
 };
+
